@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { registerSchema } from "../schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-function Register() {
+function Register() { 
   const { signup, errors: registerErrors, isAuthenticated } = useAuth();
   const {
     register,

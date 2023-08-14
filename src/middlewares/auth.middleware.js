@@ -12,7 +12,7 @@ export const auth = (req, res, next) => {
 
     jwt.verify(token, TOKEN_SECRET, (error, user) => {
       if (error) {
-        return res.status(401).json({ message: "Token is not valid" });
+        return res.status(401).json({ message: "Token is not valid" }); 
       }
       req.user = user;
       next();

@@ -20,7 +20,7 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
-app.use("/api", taksRoutes);
+app.use("/api", taksRoutes); 
 
 if (process.env.NODE_ENV === "production") {
   const path = await import("path");

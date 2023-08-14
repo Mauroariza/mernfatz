@@ -18,7 +18,7 @@ export const useTasks = () => {
 export function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
 
-  const getTasks = async () => {
+  const getTasks = async () => { // esta función es llamada en TasksPage y sirve para obtener todas las tareas del usuario
     const res = await getTasksRequest();
     setTasks(res.data);
   };
@@ -32,7 +32,7 @@ export function TaskProvider({ children }) {
     }
   };
 
-  const createTask = async (task) => {
+  const createTask = async (task) => { // se llama en TaskFormPage para crear
     try {
       const res = await createTaskRequest(task);
       console.log(res.data);
@@ -40,19 +40,19 @@ export function TaskProvider({ children }) {
       console.log(error);
     }
   };
-
-  const getTask = async (id) => {
+//getTask y updateTask son funciones que se utilizan en TaskFormPage para obtener los detalles de una tarea y para actualizar una tarea respectivamente
+  const getTask = async (id) => { //este id viene de los parámetros de la url detectados en taskFormPage
     try {
-      const res = await getTaskRequest(id);
+      const res = await getTaskRequest(id); //esta función es creada en api/tasks.js
       return res.data;
     } catch (error) {
       console.error(error);
     }
   };
 
-  const updateTask = async (id, task) => {
+  const updateTask = async (id, task) => { //esta función es llamada en TaskFormPage para actualizar
     try {
-      await updateTaskRequest(id, task);
+      await updateTaskRequest(id, task); //esta función es creada en api/tasks.js y recibe el id de la tarea y el objeto con los datos de la tarea
     } catch (error) {
       console.error(error);
     }
