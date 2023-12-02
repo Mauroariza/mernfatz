@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
+import 'dotenv/config'
+
 
 import authRoutes from "./routes/auth.routes.js";
 import taksRoutes from "./routes/tasks.routes.js";
@@ -19,7 +21,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
 
-app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes);  
 app.use("/api", taksRoutes); 
 
 if (process.env.NODE_ENV === "production") {

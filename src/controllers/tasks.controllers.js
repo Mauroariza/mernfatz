@@ -18,7 +18,7 @@ export const createTask = async (req, res) => {
       date,
       user: req.user.id,
     });
-    await newTask.save();
+    await newTask.save();// aquí se guarda la tarea en la base de datos y mongoose le asigna un id
     res.json(newTask);
   } catch (error) {
     return res.status(500).json({ message: error.message });

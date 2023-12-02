@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import {
-  createTaskRequest,
+  createTaskRequest, 
   deleteTaskRequest,
   getTasksRequest,
   getTaskRequest,
@@ -19,7 +19,7 @@ export function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
 
   const getTasks = async () => { // esta función es llamada en TasksPage y sirve para obtener todas las tareas del usuario
-    const res = await getTasksRequest();
+    const res = await getTasksRequest();//utiliza await aquí porque getTasksRequest es una función asíncrona
     setTasks(res.data);
   };
 

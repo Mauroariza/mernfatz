@@ -9,7 +9,7 @@ import { validateSchema } from "../middlewares/validator.middleware.js";
 import { loginSchema, registerSchema } from "../schemas/auth.schema.js";
 
 const router = Router();
-
+//estas rutas coinciden con las rutas de axios en el frontend
 router.post("/register", validateSchema(registerSchema), register);
 router.post("/login", validateSchema(loginSchema), login);
 router.get("/verify", verifyToken);

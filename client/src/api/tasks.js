@@ -1,6 +1,6 @@
 import axios from "./axios";
 
-export const getTasksRequest = async () => axios.get("/tasks");
+export const getTasksRequest = async () => axios.get("/tasks");//async es para que la función sea asíncrona
 
 export const createTaskRequest = async (task) => axios.post("/tasks", task);
 
@@ -10,7 +10,7 @@ export const updateTaskRequest = async (_id,task) => //agregué el id como pará
 export const deleteTaskRequest = async (id) => axios.delete(`/tasks/${id}`);
 
 export const getTaskRequest = async (id) => axios.get(`/tasks/${id}`); //esta función se utiliza para obtener una tarea existente en el backend.
-//el id de getTaskRequest es el id de la tarea que queremos obtener del backend y viene de la ruta de la tarea en el backend.
+//el id de getTaskRequest es el id de la tarea que queremos obtener del backend y viene de la ruta de la tarea en el frontend
 
 
 

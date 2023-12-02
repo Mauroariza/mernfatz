@@ -16,14 +16,14 @@ function App() {
       <TaskProvider>
         <BrowserRouter>
           <main className="container content-container mx-auto px-10 md:px-0">
-            <Navbar />
+          <Navbar/>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/tasks" element={<TasksPage />} />{/* cuando el usuario hace clic en el botón de ver tareas, se le redirige a la página de tareas */ }
-                <Route path="/add-task" element={<TaskFormPage />} /> {/* cuando el usuario hace clic en el botón de agregar tarea, se le redirige a la página de formulario de tareas */}  
+                <Route path="/add-task" element={<TaskFormPage />} /> {/* cuando el usuario hace clic en el botón de agregar tarea , se le redirige a la página de formulario de tareas */}  
                 <Route path="/tasks/:id" element={<TaskFormPage />} /> {/* cuando el usuario hace clic en el botón de editar tarea, se le redirige a la página de formulario de tareas */ }
                 <Route path="/profile" element={<h1>Profile</h1>} />
               </Route>

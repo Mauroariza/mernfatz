@@ -2,23 +2,28 @@ import User from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { TOKEN_SECRET } from "../config.js";
-import { createAccessToken } from "../libs/jwt.js";
+import { createAccessToken } from "../libs/jwt.creation.js";
 
-export const register = async (req, res) => {
+/**
+ *? función de registro de usuario. Se utiliza en el endpoint /auth/register
+
+ */
+
+export const register = async (req, res) => { 
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password } = req.body;//extraemos los datos del body de la petición
 
-    const userFound = await User.findOne({ email });
+    const userFound = await User.findOne({ email });//buscamos en la base de datos si ya existe un usuario con ese email
 
-    if (userFound)
+    if (userFound)//si ya existe un usuario con ese email, retornamos un error
       return res.status(400).json({
         message: ["The email is already in use"],
       });
 
-    // hashing the password
+    // hashing the password es para encriptar la contraseña
     const passwordHash = await bcrypt.hash(password, 10);
 
-    // creating the user
+    // Aquí se crea el nuevo usuario en la base de datos
     const newUser = new User({
       username,
       email,
@@ -26,15 +31,15 @@ export const register = async (req, res) => {
     });
 
     // saving the user in the database
-    const userSaved = await newUser.save();
+    const userSaved = await newUser.save();// aquí se guarda el usuario en la base de datos y mongoose le asigna un id
 
-    // create access token
+    // aquí se hace el llamado a la función que crea el token en el archivo jwt y se le pasa el payload
     const token = await createAccessToken({
       id: userSaved._id,
     });
 
-    res.cookie("token", token, {
-      httpOnly: process.env.NODE_ENV !== "development",
+    res.cookie("token", token, {// aquí estoy utilizando el objeto res que viene desde express y su método cookie() para crearla
+      httpOnly: process.env.NODE_ENV !== "development",//será true si no estamos en desarrollo es decir en producción
       secure: true,
       sameSite: "none",
     });
@@ -48,6 +53,11 @@ export const register = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+/**
+ *? función de login de usuario. Se utiliza en el endpoint /auth/login
+
+ */
 
 export const login = async (req, res) => {
   try {
@@ -86,6 +96,9 @@ export const login = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+/**
+ *? función de verifyToken de usuario. Se utiliza en el endpoint /auth/verify
+ */
 
 export const verifyToken = async (req, res) => {
   const { token } = req.cookies;
@@ -105,6 +118,9 @@ export const verifyToken = async (req, res) => {
   });
 };
 
+/**
+ *? función de logout de usuario. Se utiliza en el endpoint /auth/logout
+ */
 export const logout = async (req, res) => {
   res.cookie("token", "", {
     httpOnly: true,
@@ -113,3 +129,17 @@ export const logout = async (req, res) => {
   });
   return res.sendStatus(200);
 };
+
+
+
+
+
+
+/*
+Las principales acciones de auth.controller.js son:
+1. Crear un nuevo usuario con un nombre de usuario, correo electrónico y contraseña 
+2. Autenticar un usuario con un correo electrónico y una contraseña y generar un token de acceso que es una cookie
+3. Verificar el token de autenticación del usuario para mantener la sesión del usuario
+4. Cerrar sesión de un usuario eliminando la cookie del token de acceso
+
+*/

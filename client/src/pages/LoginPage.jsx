@@ -17,7 +17,7 @@ export function LoginPage() {
   const { signin, errors: loginErrors, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  const onSubmit = (data) => signin(data);
+  const onSubmit = (data) => signin(data); // cuando el usuario hace clic en el botón de inicio de sesión, se llama a la función signin() del contexto de autenticación y se le pasa el objeto data como argumento. Este contiene los valores de los campos de entrada del formulario de inicio de sesión.
 
   useEffect(() => {
     if (isAuthenticated) {

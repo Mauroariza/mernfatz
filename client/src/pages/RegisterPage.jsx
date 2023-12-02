@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { useAuth } from "../context/authContext";
 import { Link, useNavigate } from "react-router-dom";
-import { Card, Message, Button, Input, Label } from "../components/ui";
+import { Card, Message, Button, Input, Label } from "../components/ui"; 
 import { useForm } from "react-hook-form";
 import { registerSchema } from "../schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 function Register() { 
   const { signup, errors: registerErrors, isAuthenticated } = useAuth();
-  const {
+  const { 
     register,
     handleSubmit,
     formState: { errors },
@@ -16,7 +16,7 @@ function Register() {
     resolver: zodResolver(registerSchema),
   });
   const navigate = useNavigate();
-
+//aquí se crea la función onSubmit, es una función que el programador crea. 
   const onSubmit = async (value) => {
     await signup(value);
   };

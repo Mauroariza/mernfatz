@@ -27,16 +27,18 @@ export function TaskFormPage() {
         updateTask(params.id, { //esta función se crea en el componente tasksContext y lleva dentro a updateTaskRequest
           ...data, //se copian todas las propidades de data al objeto que se está pasando como argumento a updateTask
           date: dayjs.utc(data.date).format(),
+          
         });
+        navigate('/tasks');
         console.log(params.id,data)
       } else {
         createTask({ //ceateTask se crea en taskContext y lleva a createTaskRequest dentro, quien se comunica con el backend
           ...data,
           date: dayjs.utc(data.date).format(),
         });
+        navigate('/tasks');
       }
 
-     
     } catch (error) {
       console.log(error);
       
